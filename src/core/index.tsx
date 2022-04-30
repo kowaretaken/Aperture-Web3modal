@@ -27,7 +27,8 @@ const defaultOpts: ICoreOptions = {
   cacheProvider: false,
   disableInjectedProvider: false,
   providerOptions: {},
-  network: ""
+  network: "",
+  renderModal: false,
 };
 
 export class Core {
@@ -62,7 +63,7 @@ export class Core {
     this.providerController.on(SELECT_EVENT, this.onProviderSelect);
 
     this.userOptions = this.providerController.getUserOptions();
-    this.renderModal();
+    options.renderModal && this.renderModal();
   }
 
   get cachedProvider(): string {
@@ -135,6 +136,10 @@ export class Core {
     return this.userOptions
   }
 
+  public getProviderController(): ProviderController {
+    return this.providerController;
+  }
+
   public clearCachedProvider(): void {
     this.providerController.clearCachedProvider();
   }
@@ -168,6 +173,7 @@ export class Core {
   }
 
   private _toggleModal = async () => {
+    if(!this.renderModal) return;
     const d = typeof window !== "undefined" ? document : "";
     const body = d ? d.body || d.getElementsByTagName("body")[0] : "";
     if (body) {
