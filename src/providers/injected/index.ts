@@ -52,6 +52,18 @@ import SequenceLogo from "../logos/sequence.svg";
 import BraveLogo from "../logos/brave.svg";
 // @ts-ignore
 import RabbyLogo from "../logos/rabby.svg";
+// @ts-ignore
+import BitkeepLogo from "../logos/bitkeepwallet.png";
+// @ts-ignore
+import ClvLogo from "../logos/clv.svg";
+// @ts-ignore
+import TokenPocketLogo from "../logos/tokenpocket.svg";
+// @ts-ignore
+import CoreLogo from "../logos/core.svg";
+// @ts-ignore
+import GameStopLogo from "../logos/gamestopwallet.svg";
+// @ts-ignore
+import ExodusLogo from "../logos/exodus.svg";
 
 export const FALLBACK: IProviderInfo = {
   id: "injected",
@@ -258,5 +270,53 @@ export const BRAVE: IProviderInfo = {
   name: "Brave",
   logo: BraveLogo,
   type: "injected",
-  check: 'isBraveWallet'
+  check: "isBraveWallet"
+};
+
+export const CLV: IProviderInfo = {
+  id: "injected",
+  name: "CLV",
+  logo: ClvLogo,
+  type: "injected",
+  check: "isCloverWallet"
+};
+
+export const BITKEEPWALLET: IProviderInfo = {
+  id: "injected",
+  name: "Bitkeep Wallet",
+  logo: BitkeepLogo,
+  type: "injected",
+  check: "isBitKeep"
+};
+
+export const CORE: IProviderInfo = {
+  id: "injected",
+  name: "Core",
+  logo: CoreLogo,
+  type: "injected",
+  check: "isAvalanche"
+};
+
+export const TOKENPOCKET: IProviderInfo = {
+  id: "injected",
+  name: "TokenPocket Wallet",
+  logo: TokenPocketLogo,
+  type: "injected",
+  check: "isTokenPocket"
+};
+
+export const GAMESTOP: IProviderInfo = {
+  id: "injected",
+  name: "GameStop Wallet",
+  logo: GameStopLogo,
+  type: "injected",
+  check: "isGamestop"
+}
+
+export const EXODUS: IProviderInfo = {
+  id: "injected",
+  name: "Exodus",
+  logo: ExodusLogo,
+  type: "injected",
+  check: "isExodus"
 };
