@@ -29,11 +29,11 @@ export class ProviderController {
   public shouldCacheProvider: boolean = false;
   public disableInjectedProvider: boolean = false;
 
-  private eventController: EventController = new EventController();
-  private injectedProvider: IProviderInfo | null = null;
-  private providers: IProviderDisplayWithConnector[] = [];
-  private providerOptions: IProviderOptions;
-  private network: string = "";
+  public eventController: EventController = new EventController();
+  public injectedProvider: IProviderInfo | null = null;
+  public providers: IProviderDisplayWithConnector[] = [];
+  public providerOptions: IProviderOptions;
+  public network: string = "";
 
   constructor(opts: IProviderControllerOptions) {
     this.cachedProvider = getLocal(CACHED_PROVIDER_KEY) || "";
@@ -78,12 +78,14 @@ export class ProviderController {
             typeof options.display !== "undefined" &&
             typeof options.connector !== "undefined"
           ) {
-            this.providers.push({
+            const providerInfo = {
               ...list.providers.FALLBACK,
               id,
               ...options.display,
               connector: options.connector
-            });
+            };
+            options.logo && (providerInfo.logo = options.logo);
+            this.providers.push(providerInfo);
           }
         }
       });
@@ -190,6 +192,11 @@ export class ProviderController {
   public setCachedProvider(id: string) {
     this.cachedProvider = id;
     setLocal(CACHED_PROVIDER_KEY, id);
+  }
+
+  public getLogo(id?: string) {
+    return this.providers.filter(x => x.id === id ?? this.cachedProvider)[0]
+      ?.logo;
   }
 
   public connectTo = async (

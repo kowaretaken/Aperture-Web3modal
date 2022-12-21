@@ -45,6 +45,7 @@ export interface IProviderOptions {
     options?: any;
     connector?: Connector;
     display?: Partial<IProviderDisplay>;
+    logo?: string;
   };
 }
 

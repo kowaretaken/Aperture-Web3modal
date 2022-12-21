@@ -32,12 +32,12 @@ const defaultOpts: ICoreOptions = {
 };
 
 export class Core {
-  private show: boolean = INITIAL_STATE.show;
-  private themeColors: ThemeColors;
-  private eventController: EventController = new EventController();
-  private lightboxOpacity: number;
-  private providerController: ProviderController;
-  private userOptions: IProviderUserOptions[];
+  public show: boolean = INITIAL_STATE.show;
+  public themeColors: ThemeColors;
+  public eventController: EventController = new EventController();
+  public lightboxOpacity: number;
+  public providerController: ProviderController;
+  public userOptions: IProviderUserOptions[];
 
   constructor(opts?: Partial<ICoreOptions>) {
     const options: ICoreOptions = {
@@ -155,7 +155,7 @@ export class Core {
 
   // --------------- PRIVATE METHODS --------------- //
 
-  private renderModal() {
+  public renderModal() {
     const el = document.createElement("div");
     el.id = WEB3_CONNECT_MODAL_ID;
     document.body.appendChild(el);
@@ -172,7 +172,7 @@ export class Core {
     );
   }
 
-  private _toggleModal = async () => {
+  public _toggleModal = async () => {
     if(!this.renderModal) return;
     const d = typeof window !== "undefined" ? document : "";
     const body = d ? d.body || d.getElementsByTagName("body")[0] : "";
@@ -186,37 +186,37 @@ export class Core {
     await this.updateState({ show: !this.show });
   };
 
-  private onError = async (error: any) => {
+  public onError = async (error: any) => {
     if (this.show) {
       await this._toggleModal();
     }
     this.eventController.trigger(ERROR_EVENT, error);
   };
 
-  private onProviderSelect = (providerId: string) => {
+  public onProviderSelect = (providerId: string) => {
     this.eventController.trigger(SELECT_EVENT, providerId);
   };
 
-  private onConnect = async (provider: any) => {
+  public onConnect = async (provider: any) => {
     if (this.show) {
       await this._toggleModal();
     }
     this.eventController.trigger(CONNECT_EVENT, provider);
   };
 
-  private onClose = async () => {
+  public onClose = async () => {
     if (this.show) {
       await this._toggleModal();
     }
     this.eventController.trigger(CLOSE_EVENT);
   };
 
-  private updateState = async (state: any) => {
+  public updateState = async (state: any) => {
     Object.keys(state).forEach(key => {
       this[key] = state[key];
     });
     await window.updateWeb3Modal(state);
   };
 
-  private resetState = () => this.updateState({ ...INITIAL_STATE });
+  public resetState = () => this.updateState({ ...INITIAL_STATE });
 }
